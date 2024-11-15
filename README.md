@@ -67,6 +67,7 @@ To achieve this, when users submit a message to the web server, the web server w
 
 ![File-Search-screenshot](assets/FileSearchAgent.png)
 
+
 ## Deployment to Azure
 
 Follow these steps for deployment:
