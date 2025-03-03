@@ -330,6 +330,7 @@ module api 'api.bicep' = {
     containerRegistryName: containerApps.outputs.registryName
     projectConnectionString: projectConnectionString
     agentDeploymentName: agentDeploymentName
+    agentName: agentName
     exists: apiAppExists
   }
 }

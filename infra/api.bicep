@@ -9,6 +9,7 @@ param serviceName string = 'api'
 param exists bool
 param projectConnectionString string
 param agentDeploymentName string
+param agentName string
 
 resource apiIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: identityName
@@ -23,6 +24,10 @@ var env = [
   {
     name: 'AZURE_AIPROJECT_CONNECTION_STRING'
     value: projectConnectionString
+  }
+  {
+    name: 'AZURE_AI_AGENT_NAME'
+    value: agentName
   }
   {
     name: 'AZURE_AI_AGENT_DEPLOYMENT_NAME'
