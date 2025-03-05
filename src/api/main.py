@@ -106,6 +106,21 @@ async def lifespan(app: fastapi.FastAPI):
         if agent == None:
             raise Exception("Agent not found")
 
+        files_list = await ai_client.agents.list_files()
+        data = files_list.data
+        # TODO: Fix bug: extra files from deleted agents are coming up 
+        for i in range(0, 2):
+            file = data[i]
+            logger.info(f"File object: # {i}")
+            logger.info(f"File object: {file}")
+            try:
+                file_name = file.filename
+                # TODO: Is it possible to get the filepath through azure? 
+                file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'files', file_name))
+                files[file.filename] = {"id": file.id, "path": file_path}
+            except Exception as e:
+                logger.error(f"Error processing file object: {e}", exc_info=True)
+
     except Exception as e:
         logger.error(f"Error creating agent: {e}", exc_info=True)
         raise RuntimeError(f"Failed to create the agent: {e}")
