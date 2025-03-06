@@ -202,8 +202,6 @@ async def fetch_document(request: Request):
     try:
         files = json.loads(files_env)
         logger.info("Successfully parsed UPLOADED_FILE_MAP from environment variable.")
-        logger.info(f"Files: {files}")
-        logger.info(f"File names: {list(files.keys())}")
     except json.JSONDecodeError:
         files = {}
         logger.warning("Failed to parse UPLOADED_FILE_MAP from environment variable.", exc_info=True)

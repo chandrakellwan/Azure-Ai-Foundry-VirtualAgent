@@ -108,7 +108,7 @@ async def update_agent(agent: Agent, ai_client: AIProjectClient) -> Agent:
     return agent
 
 
-async def list_or_create_agent():
+async def initialize_resources():
     try:
         ai_client = AIProjectClient.from_connection_string(
             credential=DefaultAzureCredential(exclude_shared_token_cache_credential=True),
@@ -148,7 +148,7 @@ async def list_or_create_agent():
 
 def on_starting(server):
     """This code runs once before the workers will start."""
-    asyncio.get_event_loop().run_until_complete(list_or_create_agent())
+    asyncio.get_event_loop().run_until_complete(initialize_resources())
 
 max_requests = 1000
 max_requests_jitter = 50
