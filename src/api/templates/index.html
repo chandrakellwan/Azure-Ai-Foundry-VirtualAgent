@@ -12,6 +12,32 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/cosmo/bootstrap.min.css"
         integrity="sha256-axRDISYf7Hht1KhcMnfDV2nq7hD/8Q9Rxa0YlW/o3NU=" crossorigin="anonymous">
     <link href="/static/styles.css" rel="stylesheet" type="text/css">
+    <style>
+        #messages {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #placeholder-wrapper {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        #placeholder-message {
+            color: #6c757d;
+        }
+        .header {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .message-content {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid h-100 d-flex flex-row">
@@ -19,7 +45,11 @@
             <!-- Chat Section -->
             <div class="col-full d-flex flex-column h-100" id="chat-container"> <!-- Full width initially -->
                 <div id="messages" class="px-4 pb-4 pt-2 flex-grow-1 overflow-y-auto align-items-stretch">
-                    <!-- Message content goes here -->
+                    <div id="placeholder-wrapper">
+                        <div id="placeholder-message" class="text-center text-muted my-3">
+                            <div class="header">Getting Started with Agents Using Azure AI Foundry</div>
+                            Type your message below. You can start casually with something fun like "Tell me a joke," or ask specifically about the Azure Search files, such as "What is Contoso Galaxy Innovations product?"                        </div>
+                    </div>
                 </div>
                 
                 <div id="chat-area" class="text-light px-4 py-2 rounded-top text-dark d-flex flex-column justify-content-center background-user">
