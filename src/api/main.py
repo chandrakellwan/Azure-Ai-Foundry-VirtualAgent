@@ -5,6 +5,7 @@ import contextlib
 import logging
 import os
 import sys
+import json
 from typing import Dict
 
 from azure.ai.projects.aio import AIProjectClient
@@ -56,10 +57,7 @@ else:
 
 @contextlib.asynccontextmanager
 async def lifespan(app: fastapi.FastAPI):
-    files: Dict[str, Dict[str, str]] = {}  # File name -> {"id": file_id, "path": file_path}
-    vector_store = None
     agent = None
-    create_new_agent = True
 
     try:
         if not os.getenv("RUNNING_IN_PRODUCTION"):
@@ -89,48 +87,35 @@ async def lifespan(app: fastapi.FastAPI):
         if os.environ.get("AZURE_AI_AGENT_ID") is not None:
             try: 
                 agent = await ai_client.agents.get_agent(os.environ["AZURE_AI_AGENT_ID"])
-                create_new_agent = False
                 logger.info("Agent already exists, skipping creation")
                 logger.info(f"Fetched agent, agent ID: {agent.id}")
                 logger.info(f"Fetched agent, model name: {agent.model}")
             except Exception as e:
                 logger.error(f"Error fetching agent: {e}", exc_info=True)
-                create_new_agent = True
-        if create_new_agent:
-            # Check if a previous agent created by the template exists
+
+        if not agent:
+            # Fallback to searching by name
+            agent_name = os.environ["AZURE_AI_AGENT_NAME"]
             agent_list = await ai_client.agents.list_agents()
             if agent_list.data:
                 for agent_object in agent_list.data:
-                    if agent_object.name == os.environ["AZURE_AI_AGENT_NAME"]:
+                    if agent_object.name == agent_name:
                         agent = agent_object
-        if agent == None:
-            raise Exception("Agent not found")
+                        logger.info(f"Found agent by name '{agent_name}', ID={agent_object.id}")
+                        break
 
-        files_list = await ai_client.agents.list_files()
-        data = files_list.data
-        # TODO: Fix bug: extra files from deleted agents are coming up 
-        for i in range(0, 2):
-            file = data[i]
-            logger.info(f"File object: # {i}")
-            logger.info(f"File object: {file}")
-            try:
-                file_name = file.filename
-                # TODO: Is it possible to get the filepath through azure? 
-                file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'files', file_name))
-                files[file.filename] = {"id": file.id, "path": file_path}
-            except Exception as e:
-                logger.error(f"Error processing file object: {e}", exc_info=True)
+        if not agent:
+            raise RuntimeError("No agent found. Ensure qunicorn.py created one or set AZURE_AI_AGENT_ID.")
+
+        app.state.ai_client = ai_client
+        app.state.agent = agent
+
+        yield
 
     except Exception as e:
-        logger.error(f"Error creating agent: {e}", exc_info=True)
-        raise RuntimeError(f"Failed to create the agent: {e}")
+        logger.error(f"Error during startup: {e}", exc_info=True)
+        raise RuntimeError(f"Error during startup: {e}")
 
-    app.state.ai_client = ai_client
-    app.state.agent = agent
-    app.state.files = files
-
-    try:
-        yield
     finally:
         try:
             await ai_client.close()
