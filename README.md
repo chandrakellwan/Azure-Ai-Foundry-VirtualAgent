@@ -1,15 +1,23 @@
 # Getting Started with Agents Using Azure AI Foundry 
 
-MENU: [**PREREQUISITES**](#prerequisites) \| [**DEVELOPMENT**](#development)  \| [**DEPLOYMENT**](#deployment)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**DEVELOPMENT OPTIONS**](#development-options)  \| [**SUPPORTING DOCUMENTATION**](#supporting-documentation) \| [**TROUBLESHOOTING**](#troubleshooting) 
-<!-- TODO: rename repo azure-ai-agents-chat -->
+MENU: [**FEATURES**](#features) \| [**QUICK DEPLOY**](#quick-deploy) \| [**GETTING STARTED**](#getting-started) \| [**DEVELOPMENT**](#development)  \| [**DEPLOYMENT**](#deployment)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**DEVELOPMENT OPTIONS**](#development-options)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
 
-This project creates an Azure AI Foundry hub, project and connected resources including Azure AI Services, AI Search and more. It deploys an agent chat application to Azure Container Apps that uses Azure File Search with uploaded files and can provide citations.
+This solution deploys an agent chat application to Azure Container Apps that uses Azure File Search with uploaded files and can provide citations. There are instructions for deployment through GitHub Codespaces, VS Code Dev Containers, and your local development environment.
 
+## Features
+
+This solution creates an Azure AI Foundry hub, project and connected resources including Azure AI Services, AI Search and more. For more details about the resources that are created, view the [resources](#resources) documentation. There are options to enable Retrieval-Augmented Generation (RAG) and use logging, tracing, and monitoring. 
+
+#### Architecture diagram
 
 ![Architecture diagram showing that user input used in conjunction with user identity to call app code running in Azure Container apps that processes the user input and generates a response to the user. The app code leverages Azure AI projects, Azure AI model inference, prompty, and Azure AI Search.](docs/architecture.png)
 
+## Quick Deploy
 
-## Running the Template
+| [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents) | |
+|---|---|---|
+
+## Getting Started
 
 ### Prerequisites 
 
@@ -29,16 +37,7 @@ Make sure the following tools are installed:
 1. [Azure Developer CLI (azd)](https://aka.ms/install-azd) Install or update to the latest version. Instructions can be found on the linked page.
 2. [Python 3.9+](https://www.python.org/downloads/)
 3. [Git](https://git-scm.com/downloads)
-
-#### Quota Recommendations (Optional)
-
-The default for the model capacity in deployment is 50k tokens. For optimal performance, it is recommended to increase to 100k tokens. You can change the capacity by following the steps in [setting capacity and deployment SKU](docs/deploy_customization.md#customizing-model-deployments).
-
-* Navigate to the [Azure AI Foundry Portal](https://ai.azure.com/)
-* Select the AI Project you are using for this template if you are not already in the project.
-* Select Management center from the bottom left navigation menu
-* Select Quota, click the GlobalStandard dropdown and select the model and region you are using for this accelerator to see your available quota. Please note GPT-4o mini and text-embedding-ada-002 are used as default.
-* Request more quota or delete any unused model deployments as needed.
+4. [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ## Development
 
@@ -51,7 +50,7 @@ git clone https://github.com/Azure-Samples/get-started-with-ai-agents.git
 At this point you could make changes to the code if required. However, no changes are needed to deploy and test the app as shown in the next step.
 
 #### How to configure Agent model and version
-<!-- TODO where do we want this? probably after downloading the code -->
+
 By default, the template uses model `gpt-4o-mini`, version `2024-07-18` for text generation and `text-embedding-3-small` version `1` for embeddings. If you want to personalize your agent, you can change the default configuration for your agent. Additional details on changing your agent can be found in [customizing model deployments](docs/deploy_customization.md#customizing-model-deployments). For more information on the Azure OpenAI models and non-Microsoft models that can be used in your deployment, view the [list of models supported by Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support).
 
 To specify the model (e.g. gpt-4o-mini, gpt-4o) that is deployed for the agent when `azd up` is called, set the following environment variables:
@@ -90,73 +89,63 @@ To enable message contents to be included in the traces, set the following envir
 ENV AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED=true
 ```
 
+#### Quota Recommendations (Optional)
+
+The default for the model capacity in deployment is 50k tokens. For optimal performance, it is recommended to increase to 100k tokens. You can change the capacity by following the steps in [setting capacity and deployment SKU](docs/deploy_customization.md#customizing-model-deployments).
+
+* Navigate to the [Azure AI Foundry Portal](https://ai.azure.com/)
+* Select the AI Project you are using for this template if you are not already in the project.
+* Select Management center from the bottom left navigation menu
+* Select Quota, click the GlobalStandard dropdown and select the model and region you are using for this accelerator to see your available quota. Please note GPT-4o mini and text-embedding-ada-002 are used as default.
+* Request more quota or delete any unused model deployments as needed.
+
 ## Deployment
 
-Once you've opened the project locally and made any desired adjustments, you can deploy it to Azure. 
+### Deployment Options
 
-1. Login to Azure:
+Pick from the options below to see step-by-step instructions for: GitHub Codespaces, VS Code Dev Containers, and Local Environments. 
 
-    ```shell
-    azd auth login
-    ```
+<details>
+  <summary><b>GitHub Codespaces</b></summary>
 
-2. (Optional) If you would like to customize the deployment to [disable resources](docs/deploy_customization.md#disabling-resources), [customize resource names](docs/deploy_customization.md#customizing-resource-names),
-or [customize the models](docs/deploy_customization.md#customizing-model-deployments), you can follow those steps now.
+#### Deploy in GitHub Codespaces
 
-3. Provision and deploy all the resources:
+You can run this template virtually by using GitHub Codespaces. The button will open a web-based VS Code instance in your browser:
 
-    ```shell
-    azd up
-    ```
+1. Open the template (this may take several minutes):
 
-    It will prompt you to provide an `azd` environment name (like "azureaiapp"), select a subscription from your Azure account, and select a location which has quota for all the resources. Then it will provision the resources in your account and deploy the latest code. If you get an error or timeout with deployment, changing the location can help, as there may be availability constraints for the resources.
+    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents)
 
-    **NOTE!** If you get authorization failed and/or permission related errors during the deployment, please refer to the Azure account requirements in the [Prerequisites](#prerequisites) section.
+2. Open a terminal window
+3. Continue with the [deploying steps](#deployment)
 
+</details>
 
-4. When `azd` has finished deploying, you'll see an     endpoint URI in the command output. Visit that URI, and you should see the app! 🎉
+<details>
+  <summary><b>VS Code Dev Containers</b></summary>
 
-    You can view information about your deployment with:
-    ```shell
-    azd show
-    ```
+#### VS Code Dev Containers
 
-5. If you make further modification to the app code, you can deploy the updated version with:
+A related option is VS Code Dev Containers, which will open the project in your local VS Code using the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers):
 
-    ```shell
-    azd deploy
-    ```
-    You can get more detailed output with the ```--debug``` parameter.
-    ```shell
-    azd deploy --debug
-    ```
-    Check for any errors during the deployment, since updated app code will not get deployed if errors occur.
+1. Start Docker Desktop (install it if not already installed [Docker Desktop](https://www.docker.com/products/docker-desktop/))
+2. Open the project:
 
-⚠️ To avoid unnecessary costs, remember to take down your app if it's no longer in use,
-either by deleting the resource group in the Portal or running `azd down`.
+    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents)
 
-## Tracing and Monitoring
+3. In the VS Code window that opens, once the project files show up (this may take several minutes), open a terminal window.
+4. Continue with the [deploying steps](#deployment)
+</details>
 
-You can view console logs in Azure portal. You can get the link to the resource group with the azd tool:
-```shell
-azd show
-```
+<details>
+  <summary><b>Local Environment</b></summary>
 
-Or if you want to navigate from the Azure portal main page, select your resource group from the 'Recent' list, or by clicking the 'Resource groups' and searching your resource group there.
+#### Local Environment
 
-After accessing you resource group in Azure portal, choose your container app from the list of resources. Then open 'Monitoring' and 'Log Stream'. Choose the 'Application' radio button to view application logs. You can choose between real-time and historical using the corresponding radio buttons. Note that it may take some time for the historical view to be updated with the latest logs.
-
-If you enabled logging to a file, you can view the log file by choosing 'Console' under the 'Monitoring' (same location as above for the console traces), opening the default console and then for example running the following command (replace app.log with the actual name of your log file):
-
-```shell
-more app.log
-```
-
-You can view the App Insights tracing in Azure AI Foundry. Select your project on the Azure AI Foundry page and then click 'Tracing'.
-
-## Development Options
-
-In addition to the development setup documented above, the following development environment options can be used.
+1. Confirm that you have the required tools installed from the [prerequisites](#prerequisites) section and the code downloaded from the [code](#code) section
+2.  Open the project folder in your terminal or editor
+3. Continue with the [deploying steps](#deploying-steps)
+</details>
 
 <details>
   <summary><b>Local Development Server</b></summary>
@@ -204,39 +193,76 @@ You can optionally use a local development server to test app changes locally. M
 6. Enter your message in the box.
 </details>
 
-<details>
-  <summary><b>GitHub Codespaces</b></summary>
+### Deploying Steps
 
-#### Deploy in GitHub Codespaces
+Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Containers](#vs-code-dev-containers) or [locally](#local-environment), you can deploy it to Azure following the following steps. 
 
-You can run this template virtually by using GitHub Codespaces. The button will open a web-based VS Code instance in your browser:
+1. Login to Azure:
 
-1. Open the template (this may take several minutes):
+    ```shell
+    azd auth login
+    ```
 
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents)
+2. (Optional) If you would like to customize the deployment to [disable resources](docs/deploy_customization.md#disabling-resources), [customize resource names](docs/deploy_customization.md#customizing-resource-names), [customize the models](docs/deploy_customization.md#customizing-model-deployments) or [increase quota](docs/deploy_customization.md#customizing-model-deployments), you can follow those steps now. 
 
-2. Open a terminal window
-3. Continue with the [deploying steps](#deployment)
+3. Provision and deploy all the resources by running the following in get-started-with-ai-agents directory:
 
-</details>
+    ```shell
+    azd up
+    ```
 
-<details>
-  <summary><b>VS Code Dev Containers</b></summary>
+4. You will be prompted to provide an `azd` environment name (like "azureaiapp"), select a subscription from your Azure account, and select a location which has quota for all the resources. Then, it will provision the resources in your account and deploy the latest code. 
 
-#### VS Code Dev Containers
+    * This deployment will take 8-12 minutes to provision the resources in your account and set up the solution with sample data.
+    * If you get an error or timeout with deployment, changing the location can help, as there may be availability constraints for the resources.
 
-A related option is VS Code Dev Containers, which will open the project in your local VS Code using the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers):
+    **NOTE!** If you get authorization failed and/or permission related errors during the deployment, please refer to the Azure account requirements in the [Prerequisites](#prerequisites) section. If you were recently granted these permissions, it may take a few minutes for the authorization to apply.
 
-1. Start Docker Desktop (install it if not already installed [Docker Desktop](https://www.docker.com/products/docker-desktop/))
-2. Open the project:
+5. When `azd` has finished deploying, you'll see an     endpoint URI in the command output. Visit that URI, and you should see the app! 🎉
 
-    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents)
+    You can view information about your deployment with:
+    ```shell
+    azd show
+    ```
 
-3. In the VS Code window that opens, once the project files show up (this may take several minutes), open a terminal window.
-4. Continue with the [deploying steps](#deployment)
-</details>
+6. If you make further modification to the app code, you can deploy the updated version with:
 
-## Supporting Documentation
+    ```shell
+    azd deploy
+    ```
+    You can get more detailed output with the ```--debug``` parameter.
+    ```shell
+    azd deploy --debug
+    ```
+    Check for any errors during the deployment, since updated app code will not get deployed if errors occur.
+
+7. You can optionally use a local development server to test app changes locally. To do so, follow the steps in [local deployment server](#local-development-server) after your app is deployed.
+
+8. When you are done using your application, you can now delete the resources by running `azd down`. This may take up to 20 minutes. 
+
+⚠️ To avoid unnecessary costs, remember to take down your app if it's no longer in use,
+either by deleting the resource group in the Portal or running `azd down`.
+
+## Tracing and Monitoring
+
+You can view console logs in Azure portal. You can get the link to the resource group with the azd tool:
+```shell
+azd show
+```
+
+Or if you want to navigate from the Azure portal main page, select your resource group from the 'Recent' list, or by clicking the 'Resource groups' and searching your resource group there.
+
+After accessing you resource group in Azure portal, choose your container app from the list of resources. Then open 'Monitoring' and 'Log Stream'. Choose the 'Application' radio button to view application logs. You can choose between real-time and historical using the corresponding radio buttons. Note that it may take some time for the historical view to be updated with the latest logs.
+
+If you enabled logging to a file, you can view the log file by choosing 'Console' under the 'Monitoring' (same location as above for the console traces), opening the default console and then for example running the following command (replace app.log with the actual name of your log file):
+
+```shell
+more app.log
+```
+
+You can view the App Insights tracing in Azure AI Foundry. Select your project on the Azure AI Foundry page and then click 'Tracing'.
+
+## Guidance
 
 #### Costs
 
