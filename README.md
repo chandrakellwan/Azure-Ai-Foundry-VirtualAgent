@@ -108,7 +108,7 @@ Pick from the options below to see step-by-step instructions for: GitHub Codespa
 <details>
   <summary><b>GitHub Codespaces</b></summary>
 
-#### Deploy in GitHub Codespaces
+#### GitHub Codespaces
 
 You can run this template virtually by using GitHub Codespaces. The button will open a web-based VS Code instance in your browser:
 
@@ -117,7 +117,7 @@ You can run this template virtually by using GitHub Codespaces. The button will 
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents)
 
 2. Open a terminal window
-3. Continue with the [deploying steps](#deployment)
+3. Continue with the [deploying steps](#deploying-steps)
 
 </details>
 
@@ -134,7 +134,7 @@ A related option is VS Code Dev Containers, which will open the project in your 
     [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents)
 
 3. In the VS Code window that opens, once the project files show up (this may take several minutes), open a terminal window.
-4. Continue with the [deploying steps](#deployment)
+4. Continue with the [deploying steps](#deploying-steps)
 </details>
 
 <details>
@@ -152,7 +152,7 @@ A related option is VS Code Dev Containers, which will open the project in your 
 
 #### Local Development Server
 
-You can optionally use a local development server to test app changes locally. Make sure you first [deployed the app](#deployment) to Azure before running the development server.
+You can optionally use a local development server to test app changes locally. Make sure you first [deployed the app](#deploying-steps) to Azure before running the development server.
 
 1. Create a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html#creating-virtual-environments) and activate it.
 
