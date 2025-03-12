@@ -54,6 +54,10 @@ resources:
       - ai-project
     port: 50505
     env:
+     #  Required ENV VARS for the app to run
+     #  AZURE_AIPROJECT_CONNECTION_STRING is automatically set by azd
+     - name: AZURE_AI_AGENT_NAME
+       value: agent-template-assistant
      - name: AZURE_AI_AGENT_DEPLOYMENT_NAME
        value: gpt-4o-mini
      - name: RUNNING_IN_PRODUCTION
