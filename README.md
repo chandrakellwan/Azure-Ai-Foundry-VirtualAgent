@@ -63,9 +63,9 @@ When you start a deployment, most parameters will have default values. You can c
 | **Azure Region** | Select a region with quota which supports your selected model. |   |
 | **Model** | Choose from the [list of models supported by Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) for your selected region | gpt-4o-mini |  
 | **Model Format** | Choose from OpenAI or Microsoft, depending on your model | OpenAI |  
-| **Model Deployment Capacity** | Configure capacity for your model. Recommended value is 100k. | 30k |
+| **Model Deployment Capacity** | Configure capacity for your model. Recommended value is 100k. | 50k |
 | **Embedding Model** | Choose from text-embedding-3-large, text-embedding-3-small, and text-embedding-ada-002. |  text-embedding-3-small |
-| **Embedding Model Capacity** | Configure capacity for your embedding model. |  30k |
+| **Embedding Model Capacity** | Configure capacity for your embedding model. |  50k |
 | **Knowledge Retrieval** | Choose from OpenAI's file search or including Azure AI Search Index. |  OpenAI's file search |
 
 For a detailed description of customizable fields and instructions, view the [deployment customization guide](docs/deploy_customization.md).
