@@ -208,7 +208,8 @@
       ],
       "metadata": {
         "description": "Format of the embedding model to deploy"
-      }
+      },
+      "defaultValue": "OpenAI"
     },
     "embedModelName": {
       "type": "string",
@@ -228,7 +229,7 @@
       "metadata": {
         "description": "Embedding model dimensionality"
       },
-      "defaultValue": 100
+      "defaultValue": "100"
     },
     "embedModelVersion": {
       "type": "securestring",

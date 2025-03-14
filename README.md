@@ -16,9 +16,9 @@ Instructions are provided for deployment through GitHub Codespaces, VS Code Dev 
 
 ## Quick Deploy
 
-| [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fget-started-with-ai-agents%2Fsophia%2Fupdate-readme%2Finfra%2Fmain.json) |
+| [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fget-started-with-ai-agents%2Frefs%2Fheads%2Fmain%2Finfra%2Fmain.json) |
 |---|---|---|
-<!-- TODO UPDATE DEPLOY TO AZURE -->
+
 Github Codespaces and Dev Containers both allow you to download and deploy the code for development. Deploy to Azure will create the resources for later deployment. Detailed instructions for options to deploy this solution can be found in [deployment](#deployment).   
 
 ## Getting Started
@@ -236,7 +236,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
 
     * For guidance on selecting a region with quota and model availability, follow the instructions in the [quota recommendations](#quota-recommendations-optional) section and ensure that your model is available in your selected region by checking the [list of models supported by Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support)
     * This deployment will take 8-12 minutes to provision the resources in your account and set up the solution with sample data.
-    * If you get an error or timeout with deployment, changing the location can help, as there may be availability constraints for the resources.
+    * If you get an error or timeout with deployment, changing the location can help, as there may be availability constraints for the resources. You can do this by running `azd down` and deleting the `.azure` folder from your code, and then running `azd up` again and selecting a new region.
 
     **NOTE!** If you get authorization failed and/or permission related errors during the deployment, please refer to the Azure account requirements in the [Prerequisites](#prerequisites) section. If you were recently granted these permissions, it may take a few minutes for the authorization to apply.
 
