@@ -1,10 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-# TODO: do we need hooks? 
-# TODO: do we need all of the variables?
 
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@0.0.1-beta
+  template: azdc-get-started-with-ai-agents@0.0.1-beta
 
 services:
   api:
@@ -13,20 +11,6 @@ services:
     host: containerapp
     docker:
       remoteBuild: true
-
-hooks:
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: ./scripts/write_env.sh
-      continueOnError: true
-      interactive: true
-
 pipeline:
   variables:
     - AZURE_RESOURCE_GROUP
@@ -59,3 +43,23 @@ pipeline:
     - AZURE_AI_EMBED_DIMENSIONS
     - AZURE_AI_SEARCH_INDEX_NAME
     - AZURE_EXISTING_AIPROJECT_CONNECTION_STRING
+    - AZURE_EXISTING_AIPROJECT_CONNECTION_STRING
+resources:
+  ai-project:
+    type: ai.project
+    connStringFromEnvVar: AZURE_EXISTING_AIPROJECT_CONNECTION_STRING
+  api:
+    type: host.containerapp
+    uses:
+      - ai-project
+    port: 50505
+    env:
+     #  Required ENV VARS for the app to run
+     #  AZURE_AIPROJECT_CONNECTION_STRING is automatically set by azd
+     - name: AZURE_AI_AGENT_NAME
+       value: agent-template-assistant
+     - name: AZURE_AI_AGENT_DEPLOYMENT_NAME
+       value: gpt-4o-mini
+     - name: RUNNING_IN_PRODUCTION
+       value: "true"
+
