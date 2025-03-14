@@ -2,11 +2,13 @@
 
 MENU: [**FEATURES**](#features) \| [**QUICK DEPLOY**](#quick-deploy) \| [**GETTING STARTED**](#getting-started) \| [**DEVELOPMENT**](#development)  \| [**DEPLOYMENT**](#deployment)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**DEVELOPMENT OPTIONS**](#development-options)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
 
-This solution deploys an agent chat application to Azure Container Apps that uses Azure File Search with uploaded files and can provide citations. There are instructions for deployment through GitHub Codespaces, VS Code Dev Containers, and your local development environment.
-
 ## Features
 
+This solution deploys a web-based chat application with an AI agent running in Azure Container Apps. The agent leverages the Azure AI Agent service and utilizes Azure AI Search for knowledge retrieval from uploaded files, enabling it to generate responses with citations. The solution also includes built-in monitoring capabilities with tracing to ensure easier troubleshooting and optimized performance.
+
 This solution creates an Azure AI Foundry hub, project and connected resources including Azure AI Services, AI Search and more. For more details about the resources that are created, view the [resources](#resources) documentation. There are options to enable Retrieval-Augmented Generation (RAG) and use logging, tracing, and monitoring. 
+
+Instructions are provided for deployment through GitHub Codespaces, VS Code Dev Containers, and your local development environment.
 
 #### Architecture diagram
 
@@ -77,13 +79,13 @@ If you want to enable logging to a file, uncomment the following line in Dockerf
 The provided file logging implementation is intended for development purposes only, specifically for testing with a single client/worker. It should not be used in production environments after the R&D phase.
 
 #### Tracing to Azure Monitor
-To enable tracing to Azure Monitor, modify the value of ENABLE_AZURE_MONITOR_TRACING environment variable to true in Dockerfile found in src directory:
+To enable tracing to Azure Monitor, modify the value of `ENABLE_AZURE_MONITOR_TRACING` environment variable to true in `Dockerfile` found in src directory:
 ```code
 ENV ENABLE_AZURE_MONITOR_TRACING=true
 ```
 Note that the optional App Insights resource is required for tracing to Azure Monitor (it is created by default).
 
-To enable message contents to be included in the traces, set the following environment variable to true in the same Dockerfile. Note that the messages may contain personally identifiable information.
+To enable message contents to be included in the traces, set the following environment variable to true in the same `Dockerfile`. Note that the messages may contain personally identifiable information.
 
 ```code
 ENV AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED=true
@@ -234,7 +236,9 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
     ```shell
     azd deploy --debug
     ```
-    Check for any errors during the deployment, since updated app code will not get deployed if errors occur.
+    >**Important:**
+    >
+    >Check carefully for any errors during deployment and the startup phase of the Azure Container App. If the container fails to start correctly after deployment, the application changes you made will not take effect, and Azure Container Apps will continue serving requests from the previous stable revision.
 
 7. You can optionally use a local development server to test app changes locally. To do so, follow the steps in [local deployment server](#local-development-server) after your app is deployed.
 
