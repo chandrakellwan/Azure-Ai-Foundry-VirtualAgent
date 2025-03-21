@@ -72,7 +72,7 @@
       "value": "${AZURE_AI_AGENT_DEPLOYMENT_SKU=GlobalStandard}"
     },
     "agentDeploymentCapacity": {
-      "value": "${AZURE_AI_AGENT_DEPLOYMENT_CAPACITY=50}"
+      "value": "${AZURE_AI_AGENT_DEPLOYMENT_CAPACITY=30}"
     },
     "embeddingDeploymentName": {
       "value": "${AZURE_AI_EMBED_DEPLOYMENT_NAME=text-embedding-3-small}"
@@ -90,7 +90,7 @@
       "value": "${AZURE_AI_EMBED_DEPLOYMENT_SKU=Standard}"
     },
     "embedDeploymentCapacity": {
-      "value": "${AZURE_AI_EMBED_DEPLOYMENT_CAPACITY=50}"
+      "value": "${AZURE_AI_EMBED_DEPLOYMENT_CAPACITY=30}"
     },
     "embeddingDeploymentDimensions": {
       "value": "${AZURE_AI_EMBED_DIMENSIONS=100}"

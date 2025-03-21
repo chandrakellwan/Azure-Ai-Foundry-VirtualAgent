@@ -63,9 +63,9 @@ When you start a deployment, most parameters will have default values. You can c
 | **Azure Region** | Select a region with quota which supports your selected model. |   |
 | **Model** | Choose from the [list of models supported by Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) for your selected region | gpt-4o-mini |  
 | **Model Format** | Choose from OpenAI or Microsoft, depending on your model | OpenAI |  
-| **Model Deployment Capacity** | Configure capacity for your model. Recommended value is 100k. | 50k |
+| **Model Deployment Capacity** | Configure capacity for your model. Recommended value is 100k. | 30k |
 | **Embedding Model** | Choose from text-embedding-3-large, text-embedding-3-small, and text-embedding-ada-002. |  text-embedding-3-small |
-| **Embedding Model Capacity** | Configure capacity for your embedding model. |  50k |
+| **Embedding Model Capacity** | Configure capacity for your embedding model. |  30k |
 | **Knowledge Retrieval** | Choose from OpenAI's file search or including Azure AI Search Index. |  OpenAI's file search |
 
 For a detailed description of customizable fields and instructions, view the [deployment customization guide](docs/deploy_customization.md).
@@ -112,7 +112,7 @@ ENV AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED=true
 
 #### Quota Recommendations (Optional)
 
-The default for the model capacity in deployment is 50k tokens. For optimal performance, it is recommended to increase to 100k tokens. You can change the capacity by following the steps in [setting capacity and deployment SKU](docs/deploy_customization.md#customizing-model-deployments).
+The default for the model capacity in deployment is 30k tokens. For optimal performance, it is recommended to increase to 100k tokens. You can change the capacity by following the steps in [setting capacity and deployment SKU](docs/deploy_customization.md#customizing-model-deployments).
 
 * Navigate to the [Azure AI Foundry Portal](https://ai.azure.com/)
 * Select the AI Project you are using for this template if you are not already in the project.
@@ -225,6 +225,11 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
     ```
 
 2. (Optional) If you would like to customize the deployment to [disable resources](docs/deploy_customization.md#disabling-resources), [customize resource names](docs/deploy_customization.md#customizing-resource-names), [customize the models](docs/deploy_customization.md#customizing-model-deployments) or [increase quota](docs/deploy_customization.md#customizing-model-deployments), you can follow those steps now. 
+
+    ⚠️ **NOTE!** For optimal performance, the recommended quota is 100k tokens per minute. If you have the capacity, we recommend increasing the quota by running the following command: 
+    ```shell
+    azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 100
+    ```
 
 3. Provision and deploy all the resources by running the following in get-started-with-ai-agents directory:
 
