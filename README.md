@@ -18,8 +18,8 @@ Instructions are provided for deployment through GitHub Codespaces, VS Code Dev 
 
 ### Quick Deploy
 
-| [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fget-started-with-ai-agents%2Frefs%2Fheads%2Fmain%2Finfra%2Fmain.json) |
-|---|---|---|
+| [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents) | 
+|---|---|
 
 Github Codespaces and Dev Containers both allow you to download and deploy the code for development. Deploy to Azure will create the resources for later deployment. Detailed instructions for options to deploy this solution can be found in [deployment](#deployment).   
 
@@ -203,15 +203,19 @@ You can optionally use a local development server to test app changes locally. M
     python -m pip install -r requirements.txt
     ```
 
-4. Run the local server:
+4. Duplicate `src/.env.sample` and name to `.env`.
+
+5. Fill in the environamnet variables in `.env`.
+
+6. Run the local server:
 
     ```shell
     python -m uvicorn "api.main:create_app" --factory --reload
     ```
 
-5. Click 'http://127.0.0.1:8000' in the terminal, which should open a new tab in the browser.
+7. Click 'http://127.0.0.1:8000' in the terminal, which should open a new tab in the browser.
 
-6. Enter your message in the box.
+8. Enter your message in the box.
 </details>
 
 ### Deploying Steps
