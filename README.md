@@ -114,10 +114,9 @@ ENV AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED=true
 
 The default for the model capacity in deployment is 30k tokens. For optimal performance, it is recommended to increase to 100k tokens. You can change the capacity by following the steps in [setting capacity and deployment SKU](docs/deploy_customization.md#customizing-model-deployments).
 
-* Navigate to the [Azure AI Foundry Portal](https://ai.azure.com/)
-* Select the AI Project you are using for this template if you are not already in the project.
-* Select Management center from the bottom left navigation menu
-* Select Quota, click the GlobalStandard dropdown and select the model and region you are using for this accelerator to see your available quota. Please note GPT-4o mini and text-embedding-ada-002 are used as default.
+* Navigate to the home screen of the [Azure AI Foundry Portal](https://ai.azure.com/)
+* Select Quota Management buttom at the bottom of the home screen
+* In the Quota tab, click the GlobalStandard dropdown and select the model and region you are using for this accelerator to see your available quota. Please note gpt-4o-mini and text-embedding-ada-002 are used as default.
 * Request more quota or delete any unused model deployments as needed.
 
 ## Deployment
@@ -234,6 +233,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
     ```shell
     azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 100
     ```
+    If you do not increase your quota, you may encounter rate limit issues. If needed, you can increase the quota after deployment by editing your model in the Models and Endpoints tab of the [Azure AI Foundry Portal](https://ai.azure.com/).
 
 3. Provision and deploy all the resources by running the following in get-started-with-ai-agents directory:
 
