@@ -21,7 +21,7 @@ Instructions are provided for deployment through GitHub Codespaces, VS Code Dev 
 | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/get-started-with-ai-agents) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/get-started-with-ai-agents) | 
 |---|---|
 
-Github Codespaces and Dev Containers both allow you to download and deploy the code for development. Once you have selected your environment, detailed instructions for options to deploy this solution can be found in [deployment](#deployment).   
+Github Codespaces and Dev Containers both allow you to download and deploy the code for development. You can also continue with local development. Once you have selected your environment, follow the instructions below to customize and deploy your solution.    
 
 ### Prerequisites 
 
@@ -47,7 +47,9 @@ Make sure the following tools are installed:
 ## Development
 
 #### Code
-Download the project code:
+If you are using one of the [Quick Deploy options](#quick-deploy), open the codespace now. 
+
+If you are not using any of the Quick Deploy options, download the project code:
 
 ```shell
 git clone https://github.com/Azure-Samples/get-started-with-ai-agents.git
@@ -262,7 +264,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
     * In the [Azure Portal](https://portal.azure.com/), navigate to your environment's resource group. The name will be `rg-[your environment name]`. Here, you should see your container app, storage account, and all of the other [resources](#resources) that are created in the deployment.
     * In the [Azure AI Foundry Portal](https://ai.azure.com/), select your project. If you navigate to the Assistants tab, you should be able to view your new assistant, named `agent-template-assistant`. If you navigate to the Models and Endpoints tab, you should see your AI Services connection with your model deployments. 
 
-7. If you make further modification to the app code, you can deploy the updated version with:
+7. (Optional) If you make further modification to the app code, you can deploy the updated version with:
 
     ```shell
     azd deploy
@@ -275,7 +277,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
     >
     >Check carefully for any errors during deployment and the startup phase of the Azure Container App. If the container fails to start correctly after deployment, the application changes you made will not take effect, and Azure Container Apps will continue serving requests from the previous stable revision.
 
-8. You can optionally use a local development server to test app changes locally. To do so, follow the steps in [local deployment server](#local-development-server) after your app is deployed.
+8. (Optional) You can use a local development server to test app changes locally. To do so, follow the steps in [local deployment server](#local-development-server) after your app is deployed.
 
 ## Resource Clean-up
 
