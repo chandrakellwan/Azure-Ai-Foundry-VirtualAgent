@@ -2,6 +2,12 @@
 
 MENU: [**FEATURES**](#features) \| [**QUICK DEPLOY**](#quick-deploy) \| [**GETTING STARTED**](#getting-started) \| [**DEVELOPMENT**](#development)  \| [**DEPLOYMENT**](#deployment)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**DEVELOPMENT OPTIONS**](#development-options)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
 
+## Important Security Notice
+
+This template, the application code and configuration it contains, has been built to showcase Microsoft Azure specific services and tools. We strongly advise our customers not to make this code part of their production environments without implementing or enabling additional security features.  
+
+For a more comprehensive list of best practices and security recommendations for Intelligent Applications, [visit our official documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/).
+
 ## Features
 
 This solution deploys a web-based chat application with an AI agent running in Azure Container Apps. The agent leverages the Azure AI Agent service and utilizes Azure AI Search for knowledge retrieval from uploaded files, enabling it to generate responses with citations. The solution also includes built-in monitoring capabilities with tracing to ensure easier troubleshooting and optimized performance.
