@@ -1,6 +1,6 @@
 # Getting Started with Agents Using Azure AI Foundry 
 
-MENU: [**FEATURES**](#features) \| [**QUICK DEPLOY**](#quick-deploy) \| [**GETTING STARTED**](#getting-started) \| [**DEVELOPMENT**](#development)  \| [**DEPLOYMENT**](#deployment)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**DEVELOPMENT OPTIONS**](#development-options)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
+MENU: [**FEATURES**](#features) \| [**QUICK DEPLOY**](#quick-deploy) \| [**GETTING STARTED**](#getting-started) \| [**CONFIGURE YOUR ENVIRONMENT**](#configure-your-environment)  \| [**DEPLOYMENT**](#deployment)  \| [**RESOURCE CLEAN-UP**](#resource-clean-up)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
 
 ## Important Security Notice
 
@@ -18,7 +18,8 @@ Instructions are provided for deployment through GitHub Codespaces, VS Code Dev 
 
 #### Architecture diagram
 
-![Architecture diagram showing that user input used in conjunction with user identity to call app code running in Azure Container apps that processes the user input and generates a response to the user. The app code leverages Azure AI projects, Azure AI model inference, prompty, and Azure AI Search.](docs/architecture.png)
+![Architecture diagram showing that user input is provided to the Azure Container App, which contains the app code. With user identity and resource access through managed identity, the input is used to form a response. The input and the Azure monitor are able to use the Azure resources deployed in the solution: Application Insights, Azure AI Project, Azure AI Services, Azure AI Hub, Storage account, container apps environment, Container Registry, Key Vault, and Log Analytics Workspace.](docs/architecture.png)
+The user input is used in conjunction with user identity to call app code. The code runs in Azure Container apps to process the user input and generate a response to the user. The app code leverages Azure AI projects and Azure AI services, including the model and agent.
 
 ## Getting Started
 
@@ -50,7 +51,9 @@ Make sure the following tools are installed:
 3. [Git](https://git-scm.com/downloads)
 4. [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-## Development
+## Configure your Environment
+
+This section details the customizable options for this solution, including agent model, knowledge retrieval, logging, tracing, and quota recommendations. If you want to proceed with the default settings, continue to the [deployment section](#deployment). 
 
 #### Code
 If you are using one of the [Quick Deploy options](#quick-deploy), open the codespace now. 
@@ -118,7 +121,7 @@ To enable message contents to be included in the traces, set the following envir
 ENV AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED=true
 ```
 
-#### Quota Recommendations (Optional)
+#### Quota Recommendations
 
 The default for the model capacity in deployment is 30k tokens. For optimal performance, it is recommended to increase to 100k tokens. You can change the capacity by following the steps in [setting capacity and deployment SKU](docs/deploy_customization.md#customizing-model-deployments).
 
@@ -235,13 +238,13 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
     azd auth login
     ```
 
-2. (Optional) If you would like to customize the deployment to [disable resources](docs/deploy_customization.md#disabling-resources), [customize resource names](docs/deploy_customization.md#customizing-resource-names), [customize the models](docs/deploy_customization.md#customizing-model-deployments) or [increase quota](docs/deploy_customization.md#customizing-model-deployments), you can follow those steps now. 
+2. (Optional) If you would like to customize the deployment to [disable resources](docs/deploy_customization.md#disabling-resources), [customize resource names](docs/deploy_customization.md#customizing-resource-names), [customize the models](docs/deploy_customization.md#customizing-model-deployments) or [increase quota](docs/deploy_customization.md#setting-capacity-and-deployment-sku), you can follow those steps now. 
 
     ⚠️ **NOTE!** For optimal performance, the recommended quota is 100k tokens per minute. If you have the capacity, we recommend increasing the quota by running the following command: 
     ```shell
     azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 100
     ```
-    If you do not increase your quota, you may encounter rate limit issues. If needed, you can increase the quota after deployment by editing your model in the Models and Endpoints tab of the [Azure AI Foundry Portal](https://ai.azure.com/).
+    ⚠️ If you do not increase your quota, you may encounter rate limit issues. If needed, you can increase the quota after deployment by editing your model in the Models and Endpoints tab of the [Azure AI Foundry Portal](https://ai.azure.com/).
 
 3. Provision and deploy all the resources by running the following in get-started-with-ai-agents directory:
 
@@ -252,7 +255,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) or in [Dev Co
 4. You will be prompted to provide an `azd` environment name (like "azureaiapp"), select a subscription from your Azure account, and select a location which has quota for all the resources. Then, it will provision the resources in your account and deploy the latest code. 
 
     * For guidance on selecting a region with quota and model availability, follow the instructions in the [quota recommendations](#quota-recommendations-optional) section and ensure that your model is available in your selected region by checking the [list of models supported by Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support)
-    * This deployment will take 8-12 minutes to provision the resources in your account and set up the solution with sample data.
+    * This deployment will take 7-10 minutes to provision the resources in your account and set up the solution with sample data.
     * If you get an error or timeout with deployment, changing the location can help, as there may be availability constraints for the resources. You can do this by running `azd down` and deleting the `.azure` folder from your code, and then running `azd up` again and selecting a new region.
 
     **NOTE!** If you get authorization failed and/or permission related errors during the deployment, please refer to the Azure account requirements in the [Prerequisites](#prerequisites) section. If you were recently granted these permissions, it may take a few minutes for the authorization to apply.
@@ -355,7 +358,7 @@ To ensure continued best practices in your own repository, we recommend that any
 
 You may want to consider additional security measures, such as:
 
-* Enabling Microsoft Defender for Cloud to [secure your Azure resources](https://learn.microsoft.com/azure/security-center/defender-for-cloud).
+* Enabling Microsoft Defender for Cloud to [secure your Azure resources](https://learn.microsoft.com/azure/defender-for-cloud/).
 * Protecting the Azure Container Apps instance with a [firewall](https://learn.microsoft.com/azure/container-apps/waf-app-gateway) and/or [Virtual Network](https://learn.microsoft.com/azure/container-apps/networking?tabs=workload-profiles-env%2Cazure-cli).
 
 #### Resources
@@ -391,7 +394,7 @@ The template also includes dependent resources required by all AI Hub resources:
 * If your agent is occasionally unresponsive, your model may have reached its rate limit. You can increase its quota by adjusting the bicep configuration or by editing the model in the Azure AI Foundry page for your project's model deployments. 
 * If your agent is crashing, confirm that you are using a model that you have deployed to your project.
 * For easier agents configuration and streamlined integration with an existing assistants library, export the agent from Azure AI Foundry and implement a yaml-based configuration. 
-* This application is designed to serve multiple users on multiple browsers. This application uses cookies to ensure that the same thread is reused for conversations across multiple tabs in the same browser. If the browser is restarted, the old thread will continue to serve the user. However, if the application has a new agent after a server restart or a thread is deleted, a new thread will be created without requiring a browser refresh or signaling to the users.When users submit a message to the web server, the web server will create an agent, thread, and stream back a reply. The response contains `agent_id` and `thread_id` in cookies. As a result, each subsequent message sent to the web server will also contain these IDs. As long as the same agent is being used in the system and the thread can be retrieved in the cookie, the same thread will be used to serve the users.
+* This application is designed to serve multiple users on multiple browsers. This application uses cookies to ensure that the same thread is reused for conversations across multiple tabs in the same browser. If the browser is restarted, the old thread will continue to serve the user. However, if the application has a new agent after a server restart or a thread is deleted, a new thread will be created without requiring a browser refresh or signaling to the users. When users submit a message to the web server, the web server will create an agent, thread, and stream back a reply. The response contains `agent_id` and `thread_id` in cookies. As a result, each subsequent message sent to the web server will also contain these IDs. As long as the same agent is being used in the system and the thread can be retrieved in the cookie, the same thread will be used to serve the users.
 * For document handling, use filename-based downloads to avoid storing files in dictionaries.
 * Intermittent errors may arise when retrieving filenames for file IDs, which may be mitigated by using a single worker and fresh threads for each new assistant.
 * File citation can be enhanced by automatically including filenames to reduce manual steps. 

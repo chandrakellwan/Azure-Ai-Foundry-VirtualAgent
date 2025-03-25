@@ -1,7 +1,7 @@
 
 # Getting Started with Agents Using Azure AI Foundry: Deployment customization
 
-This document describes how to customize the deployment of the Agents Chat with Azure AI Foundry. Once you follow the steps here, you can run `azd up` as described in the [Deploying](./README.md#deploying) steps.
+This document describes how to customize the deployment of the Agents Chat with Azure AI Foundry. Once you follow the steps here, you can run `azd up` as described in the [Deploying](./../README.md#deploying-steps) steps.
 
 * [Disabling resources](#disabling-resources)
 * [Customizing resource names](#customizing-resource-names)
