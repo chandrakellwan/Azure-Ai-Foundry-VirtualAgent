@@ -12,7 +12,7 @@ For a more comprehensive list of best practices and security recommendations for
 
 This solution deploys a web-based chat application with an AI agent running in Azure Container Apps. The agent leverages the Azure AI Agent service and utilizes Azure AI Search for knowledge retrieval from uploaded files, enabling it to generate responses with citations. The solution also includes built-in monitoring capabilities with tracing to ensure easier troubleshooting and optimized performance.
 
-This solution creates an Azure AI Foundry hub, project and connected resources including Azure AI Services, AI Search and more. More details about the resources that are created are located in the [resources](#resources) documentation. There are options to enable Retrieval-Augmented Generation (RAG) and use logging, tracing, and monitoring. 
+This solution creates an Azure AI Foundry hub, project and connected resources including Azure AI Services, AI Search and more. More details about the resources can be found in the [resources](#resources) documentation. There are options to enable Retrieval-Augmented Generation (RAG) and use logging, tracing, and monitoring. 
 
 Instructions are provided for deployment through GitHub Codespaces, VS Code Dev Containers, and your local development environment.
 
@@ -93,7 +93,7 @@ By default, the template deploys OpenAI's [file search](https://learn.microsoft.
 To use index search, please set the local environment variable `USE_AZURE_AI_SEARCH_SERVICE` to `true` during the `azd up` command. In this case the Azure AI Search resource will be deployed and used.
 
 #### Logging
-If you want to enable logging to a file, navigate to `src/Dockerfile` and edit the code to uncomment the following line:
+To enable logging to a file, navigate to `src/Dockerfile` and edit the code to uncomment the following line:
 
  ```
  # ENV APP_LOG_FILE=app.log
