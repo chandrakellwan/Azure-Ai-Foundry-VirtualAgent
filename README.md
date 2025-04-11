@@ -34,7 +34,6 @@ Github Codespaces and Dev Containers both allow you to download and deploy the c
 ### Prerequisites 
 
 #### Azure Account
-If you do not have an Azure Subscription, you can sign up for a [free Azure account](https://azure.microsoft.com/free/) and create an Azure Subscription.
 
 To deploy this Azure environment successfully, your Azure account (the account you authenticate with) must have the following permissions and prerequisites on the targeted Azure Subscription:
 
