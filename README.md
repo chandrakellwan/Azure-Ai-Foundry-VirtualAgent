@@ -1,6 +1,6 @@
 # CK Virtual Agent Using Azure AI Foundry 
 
-MENU: [**FEATURES**](#features) \| [**AUTHENTICATION SAMPLE**](#Entra-ID-Authentication-Code) \| [**CONFIGURE YOUR ENVIRONMENT**](#configure-your-environment)  \| [**DEPLOYMENT**](#deployment)  \| [**RESOURCE CLEAN-UP**](#resource-clean-up)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
+MENU: [**FEATURES**](#features) \| [**AUTHENTICATION SAMPLE**](#entra-id-Authentication) \| [**CONFIGURE YOUR ENVIRONMENT**](#configure-your-environment)  \| [**DEPLOYMENT**](#deployment)  \| [**RESOURCE CLEAN-UP**](#resource-clean-up)  \| [**TRACING AND MONITORING**](#tracing-and-monitoring)  \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting) 
 
 ## Important Security Notice
 
