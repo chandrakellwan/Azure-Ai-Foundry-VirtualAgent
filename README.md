@@ -21,7 +21,7 @@ Instructions are provided for deployment through GitHub Codespaces, VS Code Dev 
 ![Architecture diagram showing that user input is provided to the Azure Container App, which contains the app code. With user identity and resource access through managed identity, the input is used to form a response. The input and the Azure monitor are able to use the Azure resources deployed in the solution: Application Insights, Azure AI Project, Azure AI Services, Azure AI Hub, Storage account, Azure Container App, Container Registry, Key Vault, and Log Analytics Workspace.](docs/architecture.png)
 The app code runs in Azure Container apps to process the user input and generate a response to the user. It leverages Azure AI projects and Azure AI services, including the model and agent.
 
-## Getting Started
+## Entra ID Authentication
 ![Entra-ID-Authentication-Code](https://github.com/user-attachments/assets/f7a66ea8-c8dd-44a8-99cb-2ee1b5a519ef)
 
 ### Quick Deploy
