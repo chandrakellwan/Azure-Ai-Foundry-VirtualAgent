@@ -22,6 +22,7 @@ Instructions are provided for deployment through GitHub Codespaces, VS Code Dev 
 The app code runs in Azure Container apps to process the user input and generate a response to the user. It leverages Azure AI projects and Azure AI services, including the model and agent.
 
 ## Getting Started
+![Entra-ID-Authentication-Code](https://github.com/user-attachments/assets/f7a66ea8-c8dd-44a8-99cb-2ee1b5a519ef)
 
 ### Quick Deploy
 
